@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pedido Efetuado - Circles Store</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        background-color: #2d2d36;
+        padding: 20px;
+      }
+
+      .header img {
+        width: 200px;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .header object {
+        width: 100%;
+        max-width: 100px;
+      }
+
+      .header-line {
+        width: 100%;
+        height: 1px;
+        background-color: #7af01a;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: left;
+      }
+
+      .title {
+        color: #333333;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .text {
+        color: #666666;
+        font-size: 16px;
+        margin-bottom: 16px;
+      }
+
+      .order-id {
+        text-align: right;
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .order-table th,
+      .order-table td {
+        padding: 20px; /* Espaçamento aumentado */
+        text-align: center;
+      }
+
+      .order-table th {
+        background-color: #f5f5f5; /* Cor mais clara */
+        color: #333333;
+      }
+
+      .order-table td {
+        border-bottom: 1px solid #dddddd; /* Borda inferior apenas */
+      }
+
+      .order-table tfoot td {
+        font-weight: bold;
+      }
+
+      .footer {
+        color: #999999;
+        font-size: 14px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      @media screen and (max-width: 600px) {
+        .order-table td,
+        .order-table th {
+          padding: 10px; /* Reduza o espaçamento */
+        }
+
+        .order-table thead {
+          display: table-header-group; /* Mantenha o cabeçalho visível */
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .order-table {
+          display: block;
+          overflow-x: auto;
+        }
+
+        .order-table thead,
+        .order-table tbody,
+        .order-table th,
+        .order-table td,
+        .order-table tr {
+          display: block;
+        }
+
+        .order-table thead tr {
+          position: sticky;
+          top: 0;
+          background-color: #f2f2f2; /* Cabeçalho fixo */
+        }
+
+        .order-table tr {
+          border: 1px solid #dddddd;
+          margin-bottom: 10px; /* Adicione um espaçamento entre as linhas */
+        }
+
+        .order-table td {
+          border-bottom: none; /* Remova a borda inferior */
+          position: relative;
+          padding-left: 50%; /* Adicione um espaçamento à esquerda */
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .order-table td:before {
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          width: 45%; /* Defina a largura do rótulo */
+          padding-right: 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          content: attr(data-label); /* Use o atributo data-label como rótulo */
+          font-weight: bold;
+        }
+
+        .order-table tfoot td:nth-child(3) {
+          content: "Total: ";
+          font-weight: bold;
+        }
+
+        .order-table tfoot td:last-child {
+          position: sticky;
+          bottom: 0;
+          background-color: #f5f5f5;
+          color: #333333;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <object
+        data="https://f005.backblazeb2.com/file/aulasCubos/LogoStore.svg"
+        type="image/svg+xml"
+      >
+        <!-- Fallback caso o navegador não suporte SVG -->
+        <img
+          src="https://f005.backblazeb2.com/file/aulasCubos/LogoStore.png"
+          alt="Circles Store"
+        />
+      </object>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="content">
+      <p class="order-id">Pedido nº {{pedido_id}}</p>
+      <h1 class="title">Pedido Realizado</h1>
+      <p class="text">Olá, {{usuario}},</p>
+      <p class="text">
+        Obrigado por comprar na Circles Store. Seu pedido foi realizado com
+        sucesso!
+      </p>
+
+      <h2 class="title">Resumo do pedido</h2>
+      <div class="header-line"></div>
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Valor Unitário</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each produtos_pedido}}
+          <tr>
+            <td>{{@index}}</td>
+            <td>{{descricao}}</td>
+            <td>{{valor}}</td>
+            <td>{{quantidade_produto}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td>Total:</td>
+            <td>{{valor_total}}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="header-line"></div>
+      <p class="text">Esperamos que você volte em breve.</p>
+      <p class="text">
+        Para qualquer dúvida sobre este pedido, entre em contato com
+        sac@circlesstore.com
+      </p>
+    </div>
+
+    <div class="footer">
+      Sistema gerenciado pela APIkachu<br />
+      Este e-mail foi enviado automaticamente e não deve ser respondido.
+    </div>
+  </body>
+</html>
