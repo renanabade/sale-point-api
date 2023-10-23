@@ -1,4 +1,4 @@
-CREATE DATABASE pdv;
+CREATE DATABASE salePoint;
 
 CREATE TABLE users (
   id serial primary key,
