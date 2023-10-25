@@ -4,9 +4,8 @@ const {
   getLoggedUser,
   modifyUser,
 } = require("../repo/users");
-const { checkPassword } = require("../utils/checkPassword");
-const { encryptPassword } = require("../utils/encryptPassword");
-const { generateToken } = require("../utils/generateToken");
+const { checkPassword, encryptPassword } = require("../services/password");
+const { generateToken } = require("../services/jwt");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;

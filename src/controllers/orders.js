@@ -1,9 +1,5 @@
 const { findCustomerById } = require("../repo/customer");
-const {
-  checkProductExists,
-  checkProductStock,
-  updateProductQuantity,
-} = require("../utils/checkProduct");
+
 const {
   createOrder,
   createOrderProduct,
@@ -11,6 +7,9 @@ const {
   loadOrdersProduct,
   getOrdersIdCustomer,
   getOrdersProductByCustomerId,
+  checkProductExists,
+  checkProductStock,
+  updateProductQuantity,
 } = require("../repo/orders");
 const sendOrderConfirmationMail = require("../utils/sendMail");
 
