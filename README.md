@@ -1,264 +1,361 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sales Point API Documentation</title>
-</head>
-<body>
-    <h1>Sales Point API Documentation</h1>
-    <p>This documentation provides an overview of the endpoints and functionalities of the Sales Point API. The API allows you to manage categories, users, products, customers, and orders.</p>
-    <h2>Categories</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Endpoint</th>
-                <th>Method</th>
-                <th>Description</th>
-                <th>Request Body</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>GET /category</td>
-                <td>GET</td>
-                <td>Retrieve a list of categories.</td>
-                <td>N/A</td>
-            </tr>
-        </tbody>
-    </table>
-    <h2>Users</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Endpoint</th>
-                <th>Method</th>
-                <th>Description</th>
-                <th>Request Body</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>POST /user</td>
-                <td>POST</td>
-                <td>Register a new user with the specified information.</td>
-                <td>
-                    <pre>
+# Project: Sales Point API
+# 📁 Collection: Categories 
 
-{
-"name": "random name",
-"email": "user@email.com",
-"password": "password"
-}
 
-</pre>
-</td>
-</tr>
-<tr>
-<td>POST /login</td>
-<td>POST</td>
-<td>Log in with a registered user account.</td>
-<td>
-<pre>
-{
-"email": "user@email.com",
-"password": "password"
-}
-</pre>
-</td>
-</tr>
-<tr>
-<td>GET /user</td>
-<td>GET</td>
-<td>Get information about the currently logged-in user.</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>PUT /user</td>
-<td>PUT</td>
-<td>Update user data for the currently logged-in user.</td>
-<td>
-<pre>
-{
-"name": "random user",
-"email": "another_random@email.com",
-"password": "password"
-}
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+## End-point: Get Categories
+### Method: GET
+>```
+>http://localhost:3000/category
+>```
 
-    <h2>Products</h2>
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: Users 
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Endpoint</th>
-                <th>Method</th>
-                <th>Description</th>
-                <th>Request Body</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>POST /product</td>
-                <td>POST</td>
-                <td>Register a new product with the specified information.</td>
-                <td>
-                    <pre>
 
-{
-"description": "Product description",
-"stock_quantity": 10,
-"value": 50.00,
-"category_id": 1,
-"image": "product_image",
-"image_path": "image_path"
-}
+## End-point: Register user
+### Method: POST
+>```
+>http://localhost:3000/user
+>```
+### Body (**raw**)
 
-</pre>
-</td>
-</tr>
-<tr>
-<td>PUT /product/:id</td>
-<td>PUT</td>
-<td>Update product information for a specific product.</td>
-<td>
-<pre>
+```json
 {
-"description": "Updated product description",
-"stock_quantity": 20,
-"value": 60.00,
-"category_id": 2,
-"image": "updated_product_image",
-"image_path": "updated_image_path"
+    "name": "random name",
+    "email": "user@email.com",
+    "password": "password"
 }
-</pre>
-</td>
-</tr>
-<tr>
-<td>GET /product?category_id=id</td>
-<td>GET</td>
-<td>Retrieve products filtered by category.</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>GET /product/:id</td>
-<td>GET</td>
-<td>Retrieve detailed information about a specific product.</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>DELETE /product/:id</td>
-<td>DELETE</td>
-<td>Delete a specific product.</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<h2>Customers</h2>
-<table border="1">
-<thead>
-<tr>
-<th>Endpoint</th>
-<th>Method</th>
-<th>Description</th>
-<th>Request Body</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>POST /customer</td>
-<td>POST</td>
-<td>Register a new customer with the specified information.</td>
-<td>
-<pre>
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: User login
+### Method: POST
+>```
+>http://localhost:3000/login
+>```
+### Body (**raw**)
+
+```json
 {
-"name": "Customer Name",
-"email": "customer@email.com",
-"cpf": "00000000000",
-"zip_code": "00000000",
-"street": "Customer Street",
-"number": "123",
-"city": "Customer City",
-"district": "Customer District",
-"state": "CA"
+    "email": "user@email.com",
+    "password": "password"
 }
-</pre>
-</td>
-</tr>
-<tr>
-<td>PUT /customer/:id</td>
-<td>PUT</td>
-<td>Update customer information for a specific customer.</td>
-<td>
-<pre>
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6InJhbmRvbSBuYW1lIiwiaWF0IjoxNjk4NDM4NzgwLCJleHAiOjE2OTg0NDIzODB9.Xxd96xl-7VtjHLRas-2vy_u_mGtRzTYTFxp_KSyTb3Y|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Verify Logged User
+### Method: GET
+>```
+>http://localhost:3000/user
+>```
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6InJhbmRvbSBuYW1lIiwiaWF0IjoxNjk4NDM4Nzk4LCJleHAiOjE2OTg0NDIzOTh9.IYQMrjm0pQ3w_El-2y2ZnvJ4Ouzr3TT1a46F7T2ceLg|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Modify Logged User Data
+### Method: PUT
+>```
+>http://localhost:3000/user
+>```
+### Body (**raw**)
+
+```json
 {
-"name": "Updated Customer Name",
-"email": "updated_customer@email.com",
-"cpf": "11111111111",
-"zip_code": "11111111",
-"street": "Updated Customer Street",
-"number": "456",
-"city": "Updated Customer City",
-"district": "Updated Customer District",
-"state": "NY"
+    "name": "random user",
+    "email": "another_random@email.com",
+    "password": "password"
 }
-</pre>
-</td>
-</tr>
-<tr>
-<td>GET /customer/</td>
-<td>GET</td>
-<td>Retrieve a list of customers.</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>GET /customer/:id</td>
-<td>GET</td>
-<td>Retrieve detailed information about a specific customer.</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<h2>Orders</h2>
-<table border="1">
-<thead>
-<tr>
-<th>Endpoint</th>
-<th>Method</th>
-<th>Description</th>
-<th>Request Body</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>POST /order</td>
-<td>POST</td>
-<td>Create a new order with the specified information.</td>
-<td>
-<pre>
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJlbmFuIiwiaWF0IjoxNjk4NDMwOTQ4LCJleHAiOjE2OTg0MzQ1NDh9.k_lglOYLMm22YydBHoKEMvU6ojAULSc4HJdgy4ggfNc|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: Products 
+
+
+## End-point: Register Product
+### Method: POST
+>```
+>http://localhost:3000/product
+>```
+### Body formdata
+
+|Param|value|Type|
+|---|---|---|
+|description|product|text|
+|stock_quantity|58
+|text|
+|image|undefined|file|
+|value|20000|text|
+|category_id|2|text|
+
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJlbmFuIiwiaWF0IjoxNjk4NDMwOTQ4LCJleHAiOjE2OTg0MzQ1NDh9.k_lglOYLMm22YydBHoKEMvU6ojAULSc4HJdgy4ggfNc|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Modify Product Data
+### Method: PUT
+>```
+>http://localhost:3000/product/:id
+>```
+### Body formdata
+
+|Param|value|Type|
+|---|---|---|
+|description|another product|text|
+|stock_quantity|10|text|
+|value|30000|text|
+|category_id|2|text|
+|image|undefined|file|
+
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJlbmFuIiwiaWF0IjoxNjk4NDMwOTQ4LCJleHAiOjE2OTg0MzQ1NDh9.k_lglOYLMm22YydBHoKEMvU6ojAULSc4HJdgy4ggfNc|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Print Products
+### Method: GET
+>```
+>http://localhost:3000/product?category_id=id
+>```
+### Body (**raw**)
+
+```json
+
+```
+
+### Query Params
+
+|Param|value|
+|---|---|
+|category_id|id|
+
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJlbmFuIiwiaWF0IjoxNjk4NDMwOTQ4LCJleHAiOjE2OTg0MzQ1NDh9.k_lglOYLMm22YydBHoKEMvU6ojAULSc4HJdgy4ggfNc|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Detail Product
+### Method: GET
+>```
+>http://localhost:3000/product/:id
+>```
+### Body (**raw**)
+
+```json
+
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InJlbmFuIiwiaWF0IjoxNjk4NDMwOTQ4LCJleHAiOjE2OTg0MzQ1NDh9.k_lglOYLMm22YydBHoKEMvU6ojAULSc4HJdgy4ggfNc|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Delete Product
+### Method: DELETE
+>```
+>http://localhost:3000/product/:id
+>```
+### Body (**raw**)
+
+```json
+
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzgxMzMsImV4cCI6MTY5ODQ0MTczM30.pBst_OstcSxTdl2VRE7hZh00SkTAvEY90ey1ZIBanRI|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: Customers 
+
+
+## End-point: Register Customer
+### Method: POST
+>```
+>http://localhost:3000/customer
+>```
+### Body (**raw**)
+
+```json
 {
-"customer_id": 1,
-"note": "Order notes",
-"order_products": [
+    "name": "random",
+    "email": "random@email.com",
+    "cpf": "00000000000", //brazil cpf here
+    "zip_code": "00000000",
+    "street": "street",
+    "number": "number",
+    "city": "city",
+    "district": "district",
+    "state": "aa"//brazil states, only two char"
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzQ2MTQsImV4cCI6MTY5ODQzODIxNH0.WC3poA6jnwQE02jSKjAD_xegqs0a-2r8zQGOguApbF8|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Update Customer Data
+### Method: PUT
+>```
+>http://localhost:3000/customer/:id
+>```
+### Body (**raw**)
+
+```json
 {
-"product_id": 1,
-"product_quantity": 10
+    "name": "random",
+    "email": "email@random.com",
+    "cpf": "00000000000",
+    "zip_code": "00000000",
+    "street": "street",
+    "number": "00",
+    "city": "city",
+    "district": "district",
+    "state": "aa"
 }
-]
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzQ2MTQsImV4cCI6MTY5ODQzODIxNH0.WC3poA6jnwQE02jSKjAD_xegqs0a-2r8zQGOguApbF8|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Print customers
+### Method: GET
+>```
+>http://localhost:3000/customer/
+>```
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzQ2MTQsImV4cCI6MTY5ODQzODIxNH0.WC3poA6jnwQE02jSKjAD_xegqs0a-2r8zQGOguApbF8|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Detail customers
+### Method: GET
+>```
+>http://localhost:3000/customer/:id
+>```
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzQ2MTQsImV4cCI6MTY5ODQzODIxNH0.WC3poA6jnwQE02jSKjAD_xegqs0a-2r8zQGOguApbF8|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: Orders 
+
+
+## End-point: Register Order
+### Method: POST
+>```
+>http://localhost:3000/order
+>```
+### Body (**raw**)
+
+```json
+{
+    "customer_id": 1,
+    "note": "notes here",
+    "order_products": [
+        {
+            "product_id": "1",
+            "product_quantity": "10"
+        }
+    ]
 }
-</pre>
-</td>
-</tr>
-<tr>
-<td>GET /order</td>
-<td>GET</td>
-<td>Retrieve a list of orders.</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p>This documentation outlines the endpoints and usage of the Sales Point API. Please make sure to replace <code>&lt;token&gt;</code> and other placeholders with the actual values when making API requests.</p>
-</body>
-</html>
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzQ2MTQsImV4cCI6MTY5ODQzODIxNH0.WC3poA6jnwQE02jSKjAD_xegqs0a-2r8zQGOguApbF8|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: Print Orders
+### Method: GET
+>```
+>http://localhost:3000/order
+>```
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InJ5YW4gb2xpdmVpcmEiLCJpYXQiOjE2OTg0MzQ2MTQsImV4cCI6MTY5ODQzODIxNH0.WC3poA6jnwQE02jSKjAD_xegqs0a-2r8zQGOguApbF8|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
