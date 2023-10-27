@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 const customerIdSchema = Joi.object({
-  customerId: Joi.number().integer().optional().messages({
+  customer_id: Joi.number().integer().optional().messages({
     "number.base": "The customer_id field must be a number",
     "number.empty": "The customer_id field cannot be empty",
     "number.integer": "The customer_id field must be an integer",
@@ -9,7 +9,7 @@ const customerIdSchema = Joi.object({
 });
 
 const categoryIdSchema = Joi.object({
-  categoryId: Joi.number().integer().optional().messages({
+  category_id: Joi.number().integer().optional().messages({
     "number.base": "The category_id field must be a number",
     "number.empty": "The category_id field cannot be empty",
     "number.integer": "The category_id field must be an integer",

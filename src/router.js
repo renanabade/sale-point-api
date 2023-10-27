@@ -15,9 +15,9 @@ const verifyLoggedInUser = require("./middlewares/authentication");
 const {
   registerProduct,
   updateProduct,
-  deletedProduct,
+  deleteProduct,
   printProducts,
-  detailProduct,
+  productDetails,
 } = require("./controllers/products");
 const { userSchema, loginSchema } = require("./schema/user");
 const { productSchema } = require("./schema/products");
@@ -65,13 +65,13 @@ router.get("/product", validateQueryParams(categoryIdSchema), printProducts);
 router.get(
   "/product/:id",
   validateRequestParams(idNumericSchema),
-  detailProduct
+  productDetails
 );
 
 router.delete(
   "/product/:id",
   validateRequestParams(idNumericSchema),
-  deletedProduct
+  deleteProduct
 );
 
 router.post("/customer", validateRequestBody(customerSchema), insertCustomer);

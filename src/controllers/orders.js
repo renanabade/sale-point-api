@@ -6,24 +6,24 @@ const {
   loadOrders,
   loadOrdersProduct,
   getOrdersIdCustomer,
-  getOrdersProductByCustomerId,
+  getOrdersProductBycustomer_id,
   checkProductExists,
   checkProductStock,
   updateProductQuantity,
 } = require("../repo/orders");
-const sendOrderConfirmationMail = require("../utils/sendMail");
+const sendOrderConfirmationMail = require("../services/sendMail");
 
-function groupProducts(orderProducts) {
+function groupProducts(order_products) {
   const groupedProducts = [];
 
-  for (let i = 0; i < orderProducts.length; i++) {
+  for (let i = 0; i < order_products.length; i++) {
     const existingProduct = groupedProducts.find(
-      (item) => item.productId === orderProducts[i].productId
+      (item) => item.product_id === order_products[i].product_id
     );
     if (existingProduct) {
-      existingProduct.quantity += orderProducts[i].quantity;
+      existingProduct.product_quantity += order_products[i].product_quantity;
     } else {
-      groupedProducts.push({ ...orderProducts[i] });
+      groupedProducts.push({ ...order_products[i] });
     }
   }
   return groupedProducts;
@@ -37,124 +37,119 @@ function formatCurrency(value) {
 }
 
 async function registerOrder(req, res) {
-  const { customerId, observation, orderProducts } = req.body;
+  const { customer_id, note, order_products } = req.body;
 
   try {
-    const customerExists = await findCustomerById(customerId);
+    const customerExists = await findCustomerById(customer_id);
     if (!customerExists) {
       return res.status(400).json({ message: "Customer not found" });
     }
 
-    const groupedProducts = groupProducts(orderProducts);
+    const groupedProducts = groupProducts(order_products);
     const productsInfo = [];
 
     for (let i = 0; i < groupedProducts.length; i++) {
-      const { productId, quantity } = groupedProducts[i];
+      const { product_id, product_quantity } = groupedProducts[i];
 
-      const productExists = await checkProductExists(productId);
+      const productExists = await checkProductExists(product_id);
       if (!productExists) {
         return res
           .status(400)
-          .json({ message: `Product with id ${productId} not found` });
+          .json({ message: `Product with id ${product_id} not found` });
       }
 
       const infoProduct = {
-        productId: productExists.id,
-        description: productExists.description,
-        quantity,
+        product_id: productExists.id,
+        note: productExists.note,
+        product_quantity,
         value: formatCurrency(productExists.value),
       };
 
       productsInfo.push(infoProduct);
 
-      const productInStock = await checkProductStock(
-        productId,
-        quantity
-      );
+      const productInStock = await checkProductStock(product_id, product_quantity);
       if (!productInStock) {
         return res.status(400).json({
-          message: `Product with id ${productId} has insufficient stock`,
+          message: `Product with id ${product_id} has insufficient stock`,
         });
       }
     }
 
     const orderData = {
-      customerId,
-      observation,
-      totalValue: 0,
+      customer_id,
+      note,
+      total_value: 0,
     };
 
     for (let i = 0; i < groupedProducts.length; i++) {
-      const { productId, quantity } = groupedProducts[i];
-      const updatedProduct = await updateProductQuantity(
-        productId,
-        quantity
-      );
-      orderData.totalValue += updatedProduct.value * quantity;
+      const { product_id, product_quantity } = groupedProducts[i];
+      const updatedProduct = await updateProductQuantity(product_id, product_quantity);
+      orderData.total_value += updatedProduct.value * product_quantity;
     }
 
     const registeredOrder = await createOrder(orderData);
 
     for (let i = 0; i < groupedProducts.length; i++) {
-      const { productId, quantity } = groupedProducts[i];
+      const { product_id, product_quantity } = groupedProducts[i];
       const productData = {
-        orderId: registeredOrder.id,
-        productId,
-        quantity,
-        productValue: 0,
+        order_id: registeredOrder.id,
+        product_id,
+        product_quantity,
+        product_value: 0,
       };
-      const product = await checkProductExists(productId);
-      productData.productValue = product.value;
+      const product = await checkProductExists(product_id);
+      productData.product_value = product.value;
       await createOrderProduct(productData);
     }
 
     const orderInfo = {
       user: customerExists.name,
-      orderId: registeredOrder.id,
-      orderedProducts: productsInfo,
-      totalValue: formatCurrency(registeredOrder.totalValue),
+      order_id: registeredOrder.id,
+      ordered_products: productsInfo,
+      total_value: formatCurrency(registeredOrder.total_value),
     };
 
     await sendOrderConfirmationMail(customerExists, orderInfo, productsInfo);
 
     return res.status(201).json({ message: "Order placed successfully" });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 }
 
 const printOrders = async (req, res) => {
-  const { customerId } = req.query;
+  const { customer_id } = req.query;
 
   try {
-    if (customerId) {
-      const customerExists = await findCustomerById(customerId);
+    if (customer_id) {
+      const customerExists = await findCustomerById(customer_id);
       if (!customerExists) {
         return res.status(400).json({ message: "Customer not found" });
       }
 
-      const orders = await getOrdersIdCustomer(customerId);
+      const orders = await getOrdersIdCustomer(customer_id);
 
       let result = [];
 
       for (let i = 0; i < orders.length; i++) {
-        const orderProducts = await getOrdersProductByCustomerId(orders[i].id);
+        const order_products = await getOrdersProductBycustomer_id(orders[i].id);
 
-        result.push({ order: orders[i], orderProducts: orderProducts });
+        result.push({ order: orders[i], order_products: order_products });
       }
 
       return res.status(200).json(result);
     } else {
       const orders = await loadOrders();
-      const allOrderProducts = await loadOrdersProduct();
+      const allorder_products = await loadOrdersProduct();
 
       let result = [];
 
       for (let i = 0; i < orders.length; i++) {
-        let orderProducts = allOrderProducts.filter(
-          (op) => op.orderId === orders[i].id
+        let order_products = allorder_products.filter(
+          (op) => op.order_id === orders[i].id
         );
-        result.push({ order: orders[i], orderProducts });
+        result.push({ order: orders[i], order_products });
       }
 
       return res.status(200).json(result);

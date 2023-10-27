@@ -1,37 +1,37 @@
 const knex = require("../config/connection");
 const createCustomer = async (customerData) => {
-  const registeredCustomer = await knex("clientes")
+  const registeredCustomer = await knex("customers")
     .insert(customerData)
     .returning({
       id: "id",
-      nome: "nome",
+      name: "name",
       email: "email",
     });
   return registeredCustomer[0];
 };
 
 const isEmailRegistered = async (email) => {
-  const emailFound = await knex("clientes").where({ email }).first();
+  const emailFound = await knex("customers").where({ email }).first();
   return emailFound;
 };
 
 const isCpfRegistered = async (cpf) => {
-  const registeredCpf = await knex("clientes").where({ cpf }).first();
+  const registeredCpf = await knex("customers").where({ cpf }).first();
   return registeredCpf;
 };
 
 const findCustomers = async () => {
-  const customers = await knex("clientes");
+  const customers = await knex("customers");
   return customers;
 };
 
 const findCustomerById = async (id) => {
-  const customer = await knex("clientes").where({ id }).first();
+  const customer = await knex("customers").where({ id }).first();
   return customer;
 };
 
 const modifyCustomer = async (id, customerData) => {
-  const updatedCustomer = await knex("clientes")
+  const updatedCustomer = await knex("customers")
     .where({ id })
     .update(customerData);
 

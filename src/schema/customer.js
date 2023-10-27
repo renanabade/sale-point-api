@@ -23,7 +23,7 @@ const customerSchema = Joi.object({
       "string.pattern.base":
         "The CPF field must be in a valid format (e.g., 123.456.789-00, 12345678900, 123.456.789.00)",
     }),
-  zipCode: Joi.string()
+  zip_code: Joi.string()
     .trim()
     .optional()
     .pattern(/^\d{5}-\d{3}$|^\d{8}$|^\d{5}\s\d{3}$/)
@@ -35,7 +35,7 @@ const customerSchema = Joi.object({
     }),
   street: Joi.any().optional(),
   number: Joi.any().optional(),
-  neighborhood: Joi.any().optional(),
+  district: Joi.any().optional(),
   city: Joi.any().optional(),
   state: Joi.any().optional(),
 });

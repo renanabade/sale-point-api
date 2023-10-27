@@ -1,12 +1,12 @@
 const knex = require("../config/connection");
 
 const loadCategories = () => {
-  const foundCategories = knex("categorias");
+  const foundCategories = knex("categories");
   return foundCategories;
 };
 
 const isCategoryRegistered = async (categoryId) => {
-  const foundCategory = await knex("categorias")
+  const foundCategory = await knex("categories")
     .where({ id: categoryId })
     .first();
 

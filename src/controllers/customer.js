@@ -8,14 +8,23 @@ const {
 } = require("../repo/customer");
 
 const insertCustomer = async (req, res) => {
-  const { name, email, cpf, zipCode, street, number, neighborhood, city, state } =
-    req.body;
+  const {
+    name,
+    email,
+    cpf,
+    zip_code,
+    street,
+    number,
+    district,
+    city,
+    state,
+  } = req.body;
   const emailLower = email.toLowerCase();
   const cpfOnlyNumbers = cpf.split(".").join("").split("-").join("");
   let zipCodeOnlyNumbers = null;
 
-  if (zipCode) {
-    zipCodeOnlyNumbers = zipCode.split(" ").join("").split("-").join("");
+  if (zip_code) {
+    zipCodeOnlyNumbers = zip_code.split(" ").join("").split("-").join("");
   }
 
   try {
@@ -35,10 +44,10 @@ const insertCustomer = async (req, res) => {
       name,
       email: emailLower,
       cpf: cpfOnlyNumbers,
-      zipCode: zipCodeOnlyNumbers ? zipCodeOnlyNumbers : null,
+      zip_code: zipCodeOnlyNumbers ? zipCodeOnlyNumbers : null,
       street: street ? street : null,
       number: number ? number : null,
-      neighborhood: neighborhood ? neighborhood : null,
+      district: district ? district : null,
       city: city ? city : null,
       state: state ? state : null,
     };
@@ -49,20 +58,30 @@ const insertCustomer = async (req, res) => {
     }
     return res.status(201).json(registeredCustomer);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
 const updateCustomer = async (req, res) => {
   const { id } = req.params;
-  const { name, email, cpf, zipCode, street, number, neighborhood, city, state } =
-    req.body;
+  const {
+    name,
+    email,
+    cpf,
+    zip_code,
+    street,
+    number,
+    district,
+    city,
+    state,
+  } = req.body;
   const emailLower = email.toLowerCase();
   const cpfOnlyNumbers = cpf.split(".").join("").split("-").join("");
   let zipCodeOnlyNumbers = null;
 
-  if (zipCode) {
-    zipCodeOnlyNumbers = zipCode.split(" ").join("").split("-").join("");
+  if (zip_code) {
+    zipCodeOnlyNumbers = zip_code.split(" ").join("").split("-").join("");
   }
 
   try {
@@ -88,19 +107,17 @@ const updateCustomer = async (req, res) => {
       name,
       email: emailLower,
       cpf: cpfOnlyNumbers,
-      zipCode: zipCodeOnlyNumbers ? zipCodeOnlyNumbers : null,
+      zip_code: zipCodeOnlyNumbers ? zipCodeOnlyNumbers : null,
       street: street ? street : null,
       number: number ? number : null,
-      neighborhood: neighborhood ? neighborhood : null,
+      district: district ? district : null,
       city: city ? city : null,
       state: state ? state : null,
     };
 
     const modifiedCustomer = await modifyCustomer(id, customerData);
     if (!modifiedCustomer) {
-      return res
-        .status(400)
-        .json({ message: "Could not edit the customer" });
+      return res.status(400).json({ message: "Could not edit the customer" });
     }
 
     return res.status(204).send();

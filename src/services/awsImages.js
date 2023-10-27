@@ -36,5 +36,4 @@ const deleteImage = async (link) => {
   }
 };
 
-
 module.exports = { uploadImage, deleteImage };

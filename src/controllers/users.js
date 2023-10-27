@@ -4,8 +4,8 @@ const {
   getLoggedUser,
   modifyUser,
 } = require("../repo/users");
-const { checkPassword, encryptPassword } = require("../services/password");
-const { generateToken } = require("../services/jwt");
+const { checkPass, encryptPass } = require("../services/password");
+const { genToken } = require("../services/jwt");
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    const encryptedPassword = await encryptPassword(password);
+    const encryptedPassword = await encryptPass(password);
 
     const userData = {
       name,
@@ -71,9 +71,9 @@ const loginUser = async (req, res) => {
 
     const encryptedPassword = emailRegistered.password;
 
-    if (await checkPassword(password, encryptedPassword)) {
+    if (await checkPass(password, encryptedPassword)) {
       const { id, name, email } = emailRegistered;
-      const token = generateToken(emailRegistered);
+      const token = genToken(emailRegistered);
       return res.status(200).json({
         user: {
           id,
@@ -104,7 +104,7 @@ const updateUser = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    const encryptedPassword = await encryptPassword(password);
+    const encryptedPassword = await encryptPass(password);
 
     const userData = {
       name,
@@ -115,9 +115,7 @@ const updateUser = async (req, res) => {
     const updatedUser = await modifyUser(id, userData);
 
     if (!updatedUser) {
-      return res
-        .status(400)
-        .json({ message: "Unable to update the user" });
+      return res.status(400).json({ message: "Unable to update the user" });
     }
 
     return res.status(204).json(updatedUser);
