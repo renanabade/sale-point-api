@@ -1,13 +1,13 @@
 const Joi = require("joi");
 
 const orderProductSchema = Joi.object({
-  productId: Joi.number().integer().required().messages({
+  product_id: Joi.number().integer().required().messages({
     "any.required": "The Product field is required",
     "number.base": "The Product field must be a number",
     "number.empty": "The Product field cannot be empty",
     "number.integer": "The Product field must be an integer",
   }),
-  productQuantity: Joi.number().integer().required().min(1).messages({
+  product_quantity: Joi.number().integer().required().min(1).messages({
     "any.required": "The Product Quantity field is required",
     "number.base": "The Product Quantity field must be a number",
     "number.empty": "The Product Quantity field cannot be empty",
@@ -17,17 +17,17 @@ const orderProductSchema = Joi.object({
 });
 
 const orderSchema = Joi.object({
-  customerId: Joi.number().integer().required().messages({
+  customer_id: Joi.number().integer().required().messages({
     "any.required": "The Customer field is required",
     "number.base": "The Customer field must be a number",
     "number.empty": "The Customer field cannot be empty",
     "number.integer": "The Customer field must be an integer",
   }),
-  notes: Joi.string().optional().allow("").messages({
+  note: Joi.string().optional().allow("").messages({
     "string.empty": "The Notes field can be empty",
     "string.base": "The Notes field must be text",
   }),
-  orderProducts: Joi.array()
+  order_products: Joi.array()
     .min(1)
     .items(orderProductSchema)
     .required()

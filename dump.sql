@@ -1,4 +1,4 @@
-CREATE DATABASE salePoint;
+CREATE DATABASE sales_point;
 
 CREATE TABLE users (
   id serial primary key,
@@ -28,10 +28,10 @@ VALUES
 CREATE TABLE products (
   id serial primary key,
   description text not null,
-  stockQuantity integer not null,
+  stock_quantity integer not null,
   value integer not null,
-  categoryId integer not null references categories(id),
-  productImage text
+  category_id integer not null references categories(id),
+  product_image text
 );
 
 CREATE TABLE customers (
@@ -39,7 +39,7 @@ CREATE TABLE customers (
   name text not null,
   email text not null unique,
   cpf VARCHAR(11) not null unique,
-  zipCode VARCHAR(8),
+  zip_code VARCHAR(8),
   street text,
   number text,
   district text,
@@ -49,15 +49,15 @@ CREATE TABLE customers (
 
 CREATE TABLE orders (
   id serial primary key,
-  customerId integer not null references customers(id),
+  customer_id integer not null references customers(id),
   note text,
-  totalValue integer not null
+  total_value integer not null
 );
 
-CREATE TABLE orderProducts (
+CREATE TABLE order_products (
   id serial primary key,
-  orderId integer not null references orders(id),
-  productId integer not null references products(id),
-  productQuantity integer not null,
-  productValue integer not null
+  order_id integer not null references orders(id),
+  product_id integer not null references products(id),
+  product_quantity integer not null,
+  product_value integer not null
 );

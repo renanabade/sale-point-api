@@ -1,19 +1,19 @@
 const knex = require("../config/connection");
 
 const isEmailRegistered = async (email) => {
-  const registeredEmail = await knex("usuarios").where({ email }).first();
+  const registeredEmail = await knex("users").where({ email }).first();
   return registeredEmail;
 };
 
 const findUserById = async (id) => {
-  const registeredId = await knex("usuarios").where({ id }).first();
+  const registeredId = await knex("users").where({ id }).first();
   return registeredId;
 };
 
 const createUser = async (userData) => {
-  const registeredUser = await knex("usuarios").insert(userData).returning({
+  const registeredUser = await knex("users").insert(userData).returning({
     id: "id",
-    nome: "nome",
+    name: "name",
     email: "email",
   });
 
@@ -21,18 +21,16 @@ const createUser = async (userData) => {
 };
 
 const getLoggedUser = async (id) => {
-  const user = await knex("usuarios")
-    .select("id", "nome", "email")
+  const user = await knex("users")
+    .select("id", "name", "email")
     .where("id", id)
     .first();
 
   return user;
 };
 
-const modifyUser = async (id, dadosDoUsuario) => {
-  const updateUser = await knex("usuarios")
-    .where({ id })
-    .update(dadosDoUsuario);
+const modifyUser = async (id, userData) => {
+  const updateUser = await knex("users").where({ id }).update(userData);
 
   return updateUser;
 };

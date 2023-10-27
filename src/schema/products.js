@@ -7,7 +7,7 @@ const productSchema = Joi.object({
     "string.base": "The Description field must be text",
   }),
 
-  stockQuantity: Joi.number().integer().required().min(0).messages({
+  stock_quantity: Joi.number().integer().required().min(0).messages({
     "any.required": "The Stock Quantity field is required",
     "number.base": "The Stock Quantity field must be a number",
     "number.empty": "The Stock Quantity field cannot be empty",
@@ -22,7 +22,7 @@ const productSchema = Joi.object({
     "number.min": "The Value field cannot be negative",
   }),
 
-  categoryId: Joi.number().integer().required().messages({
+  category_id: Joi.number().integer().required().messages({
     "any.required": "The Category field is required",
     "number.base": "The Category field must be a number",
     "number.empty": "The Category field cannot be empty",

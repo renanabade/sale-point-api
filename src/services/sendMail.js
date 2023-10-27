@@ -1,4 +1,4 @@
-const compilerMail = require("../utils/compiler");
+const compilerMail = require("../services/compiler");
 const transporterMailer = require("../config/nodemailer");
 
 async function sendOrderConfirmationMail(client, orderInfo, productsInfo) {

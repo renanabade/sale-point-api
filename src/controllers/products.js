@@ -9,15 +9,14 @@ const {
   getProduct,
   getProductIdCategory,
 } = require("../repo/products");
-const deleteImage = require("../utils/deleteImage");
-const uploadImage = require("../utils/uploadImage");
+const { deleteImage, uploadImage } = require("../services/awsImages");
 
 const registerProduct = async (req, res) => {
-  const { description, stockQuantity, value, categoryId } = req.body;
+  const { description, stock_quantity, value, category_id } = req.body;
   const { file } = req;
 
   try {
-    const categoryExists = await isCategoryRegistered(categoryId);
+    const categoryExists = await isCategoryRegistered(category_id);
     if (!categoryExists) {
       return res.status(400).json({ message: "Category not found" });
     }
@@ -26,10 +25,10 @@ const registerProduct = async (req, res) => {
 
     const productData = {
       description,
-      stockQuantity: parseInt(stockQuantity),
+      stock_quantity: parseInt(stock_quantity),
       value: parseInt(value),
-      categoryId: parseInt(categoryId),
-      productImage: imageLink,
+      category_id: parseInt(category_id),
+      product_image: imageLink,
     };
 
     const registeredProduct = await createProduct(productData);
@@ -46,7 +45,7 @@ const registerProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { description, stockQuantity, value, categoryId } = req.body;
+  const { description, stock_quantity, value, category_id } = req.body;
   const { file } = req;
 
   try {
@@ -55,9 +54,9 @@ const updateProduct = async (req, res) => {
       return res.status(400).json({ message: "Product not found" });
     }
 
-    deleteImage(idProductExists.productImage);
+    deleteImage(idProductExists.product_image);
 
-    const categoryExists = await isCategoryRegistered(categoryId);
+    const categoryExists = await isCategoryRegistered(category_id);
     if (!categoryExists) {
       return res.status(400).json({ message: "Category not found" });
     }
@@ -66,10 +65,10 @@ const updateProduct = async (req, res) => {
 
     const productData = {
       description,
-      stockQuantity: parseInt(stockQuantity),
+      stock_quantity: parseInt(stock_quantity),
       value: parseInt(value),
-      categoryId: parseInt(categoryId),
-      productImage: imageLink,
+      category_id: parseInt(category_id),
+      product_image: imageLink,
     };
 
     const updatedProduct = await modifyProduct(id, productData);
@@ -78,52 +77,23 @@ const updateProduct = async (req, res) => {
       return res.status(400).json({ message: "Unable to update the product" });
     }
 
-    return res.status(204).send();
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-const deleteProduct = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const productExist = await isProductRegistered(id);
-    if (!productExist) {
-      return res.status(400).json({ message: "Product not found" });
-    }
-    const productSold = await getOrderByProductId(id);
-
-    if (productSold) {
-      return res.status(400).json({
-        message: "Cannot delete a product linked to an order",
-      });
-    }
-
-    const excludedProduct = await productDeleted(id);
-    const deleteImg = await deleteImage(productExist.productImage);
-
-    if (!excludedProduct) {
-      return res.status(400).json({ message: "Unable to delete the product" });
-    }
-
-    res.status(200).json({ message: "Product deleted successfully" });
+    return res.status(201).json(productData);
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
 const printProducts = async (req, res) => {
-  const { categoryId } = req.query;
+  const { category_id } = req.query;
 
   try {
-    if (categoryId) {
-      const categoryExists = await isCategoryRegistered(categoryId);
+    if (category_id) {
+      const categoryExists = await isCategoryRegistered(category_id);
       if (!categoryExists) {
         return res.status(400).json({ message: "Category not found" });
       }
 
-      const foundProducts = await getProductIdCategory(categoryId);
+      const foundProducts = await getProductIdCategory(category_id);
       return res.status(200).json(foundProducts);
     } else {
       const foundProducts = await loadProduct();
@@ -149,6 +119,35 @@ const productDetails = async (req, res) => {
     }
 
     return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const productExist = await isProductRegistered(id);
+    if (!productExist) {
+      return res.status(400).json({ message: "Product not found" });
+    }
+    const productSold = await getOrderByProductId(id);
+
+    if (productSold) {
+      return res.status(400).json({
+        message: "Cannot delete a product linked to an order",
+      });
+    }
+
+    const excludedProduct = await productDeleted(id);
+    const deletedImage = await deleteImage(productExist.product_image);
+
+    if (!excludedProduct) {
+      return res.status(400).json({ message: "Unable to delete the product" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }
