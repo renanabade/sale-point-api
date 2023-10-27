@@ -1,9 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Point API Documentation</title>
+</head>
 <body>
     <h1>Sales Point API Documentation</h1>
     <p>This documentation provides an overview of the endpoints and functionalities of the Sales Point API. The API allows you to manage categories, users, products, customers, and orders.</p>
-
     <h2>Categories</h2>
-
     <table border="1">
         <thead>
             <tr>
@@ -22,9 +25,7 @@
             </tr>
         </tbody>
     </table>
-
     <h2>Users</h2>
-
     <table border="1">
         <thead>
             <tr>
@@ -155,26 +156,23 @@
 </tr>
 </tbody>
 </table>
-
-    <h2>Customers</h2>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Endpoint</th>
-                <th>Method</th>
-                <th>Description</th>
-                <th>Request Body</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>POST /customer</td>
-                <td>POST</td>
-                <td>Register a new customer with the specified information.</td>
-                <td>
-                    <pre>
-
+<h2>Customers</h2>
+<table border="1">
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Description</th>
+<th>Request Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST /customer</td>
+<td>POST</td>
+<td>Register a new customer with the specified information.</td>
+<td>
+<pre>
 {
 "name": "Customer Name",
 "email": "customer@email.com",
@@ -186,7 +184,6 @@
 "district": "Customer District",
 "state": "CA"
 }
-
 </pre>
 </td>
 </tr>
@@ -224,26 +221,23 @@
 </tr>
 </tbody>
 </table>
-
-    <h2>Orders</h2>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Endpoint</th>
-                <th>Method</th>
-                <th>Description</th>
-                <th>Request Body</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>POST /order</td>
-                <td>POST</td>
-                <td>Create a new order with the specified information.</td>
-                <td>
-                    <pre>
-
+<h2>Orders</h2>
+<table border="1">
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Description</th>
+<th>Request Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST /order</td>
+<td>POST</td>
+<td>Create a new order with the specified information.</td>
+<td>
+<pre>
 {
 "customer_id": 1,
 "note": "Order notes",
@@ -254,7 +248,6 @@
 }
 ]
 }
-
 </pre>
 </td>
 </tr>
@@ -266,7 +259,6 @@
 </tr>
 </tbody>
 </table>
-
-    <p>This documentation outlines the endpoints and usage of the Sales Point API. Please make sure to replace <code>&lt;token&gt;</code> and other placeholders with the actual values when making API requests.</p>
-
+<p>This documentation outlines the endpoints and usage of the Sales Point API. Please make sure to replace <code>&lt;token&gt;</code> and other placeholders with the actual values when making API requests.</p>
 </body>
+</html>
