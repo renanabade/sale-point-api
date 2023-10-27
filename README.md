@@ -2,6 +2,12 @@
 
 This API was developed as a team project with the goal of serving as the final assessment for the Cubos Academy course.
 
+Greetings to:
+Cleverson G. 
+Fabiano Ugolini
+João Carlos Lot
+Leandro Brum
+
 # 📁 Collection: Categories
 
 ## End-point: Get Categories
