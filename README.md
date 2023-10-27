@@ -1,189 +1,195 @@
-Categories
-GET Categories
-Retrieve a list of categories.
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sales Point API Documentation</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
 
-URL: http://localhost:3000/category
-Users
-POST Register User
-Register a new user with the specified information.
+    h1 {
+      font-size: 1.5em;
+    }
 
-URL: http://localhost:3000/user
-Request Body (raw JSON):
-json
-Copy code
-{
-"name": "random name",
-"email": "user@email.com",
-"password": "password"
-}
-POST User Login
-Log in with a registered user account.
+    h2 {
+      font-size: 1.25em;
+    }
 
-URL: http://localhost:3000/login
-Authorization:
-Bearer Token: <token>
-Request Body (raw JSON):
-json
-Copy code
-{
-"email": "user@email.com",
-"password": "password"
-}
-GET Verify Logged User
-Get information about the currently logged-in user.
+    h3 {
+      font-size: 1em;
+    }
 
-URL: http://localhost:3000/user
-Authorization:
-Bearer Token: <token>
-PUT Modify Logged User Data
-Update user data for the currently logged-in user.
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-URL: http://localhost:3000/user
-Authorization:
-Bearer Token: <token>
-Request Body (raw JSON):
-json
-Copy code
-{
-"name": "random user",
-"email": "another_random@email.com",
-"password": "password"
-}
-Products
-POST Register Product
-Register a new product with the specified information.
+    th, td {
+      border: 1px solid black;
+      padding: 5px;
+    }
 
-URL: http://localhost:3000/product
-Authorization:
-Bearer Token: <token>
-Request Body (form-data):
-description
-product
-stock_quantity
-image
-image_path
-value
-category_id
-PUT Modify Product Data
-Update product information for a specific product.
+    code {
+      font-family: monospace;
+    }
 
-URL: http://localhost:3000/product/:id
-Authorization:
-Bearer Token: <token>
-Path Variables:
-id
-Request Body (form-data):
-description
-stock_quantity
-value
-category_id
-image
-image_path
-GET Print Products
-Retrieve products filtered by category.
+  </style>
+</head>
+<body>
+  <h1>Sales Point API Documentation</h1>
 
-URL: http://localhost:3000/product?category_id=id
-Authorization:
-Bearer Token: <token>
-Query Params:
-category_id
-GET Detail Product
-Retrieve detailed information about a specific product.
+  <p>This documentation provides an overview of the endpoints and functionalities of the Sales Point API. The API allows you to manage categories, users, products, customers, and orders.</p>
 
-URL: http://localhost:3000/product/:id
-Authorization:
-Bearer Token: <token>
-Path Variables:
-id
-DELETE Delete Product
-Delete a specific product.
+  <h2>Categories</h2>
 
-URL: http://localhost:3000/product/:id
-Authorization:
-Bearer Token: <token>
-Path Variables:
-id
-Customers
-POST Register Customer
-Register a new customer with the specified information.
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GET /category</td>
+        <td>GET</td>
+        <td>Retrieve a list of categories.</td>
+      </tr>
+    </tbody>
+  </table>
 
-URL: http://localhost:3000/customer
-Authorization:
-Bearer Token: <token>
-Request Body (raw JSON):
-json
-Copy code
-{
-"name": "random",
-"email": "random@email.com",
-"cpf": "00000000000", // Brazil CPF here
-"zip_code": "00000000",
-"street": "street",
-"number": "number",
-"city": "city",
-"district": "district",
-"state": "aa" // Brazil states, only two characters
-}
-PUT Update Customer Data
-Update customer information for a specific customer.
+  <h2>Users</h2>
 
-URL: http://localhost:3000/customer/:id
-Authorization:
-Bearer Token: <token>
-Path Variables:
-id
-Request Body (raw JSON):
-json
-Copy code
-{
-"name": "random",
-"email": "email@random.com",
-"cpf": "00000000000",
-"zip_code": "00000000",
-"street": "street",
-"number": "00",
-"city": "city",
-"district": "district",
-"state": "aa"
-}
-GET Print Customers
-Retrieve a list of customers.
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>POST /user</td>
+        <td>POST</td>
+        <td>Register a new user with the specified information.</td>
+      </tr>
+      <tr>
+        <td>POST /login</td>
+        <td>POST</td>
+        <td>Log in with a registered user account.</td>
+      </tr>
+      <tr>
+        <td>GET /user</td>
+        <td>GET</td>
+        <td>Get information about the currently logged-in user.</td>
+      </tr>
+      <tr>
+        <td>PUT /user</td>
+        <td>PUT</td>
+        <td>Update user data for the currently logged-in user.</td>
+      </tr>
+    </tbody>
+  </table>
 
-URL: http://localhost:3000/customer/
-Authorization:
-Bearer Token: <token>
-GET Detail Customers
-Retrieve detailed information about a specific customer.
+  <h2>Products</h2>
 
-URL: http://localhost:3000/customer/:id
-Authorization:
-Bearer Token: <token>
-Path Variables:
-id
-Orders
-POST Register Order
-Create a new order with the specified information.
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>POST /product</td>
+        <td>POST</td>
+        <td>Register a new product with the specified information.</td>
+      </tr>
+      <tr>
+        <td>PUT /product/:id</td>
+        <td>PUT</td>
+        <td>Update product information for a specific product.</td>
+      </tr>
+      <tr>
+        <td>GET /product?category_id=id</td>
+        <td>GET</td>
+        <td>Retrieve products filtered by category.</td>
+      </tr>
+      <tr>
+        <td>GET /product/:id</td>
+        <td>GET</td>
+        <td>Retrieve detailed information about a specific product.</td>
+      </tr>
+      <tr>
+        <td>DELETE /product/:id</td>
+        <td>DELETE</td>
+        <td>Delete a specific product.</td>
+      </tr>
+    </tbody>
+  </table>
 
-URL: http://localhost:3000/order
-Authorization:
-Bearer Token: <token>
-Request Body (raw JSON):
-json
-Copy code
-{
-"customer_id": 1,
-"note": "notes here",
-"order_products": [
-{
-"product_id": "1",
-"product_quantity": "10"
-}
-]
-}
-GET Print Orders
-Retrieve a list of orders.
+  <h2>Customers</h2>
 
-URL: http://localhost:3000/order
-Authorization:
-Bearer Token: <token>
-This documentation outlines the endpoints and usage of the Sales Point API. Please make sure to replace <token> and other placeholders with the actual values when making API requests.
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>POST /customer</td>
+        <td>POST</td>
+        <td>Register a new customer with the specified information.</td>
+      </tr>
+      <tr>
+        <td>PUT /customer/:id</td>
+        <td>PUT</td>
+        <td>Update customer information for a specific customer.</td>
+      </tr>
+      <tr>
+        <td>GET /customer/</td>
+        <td>GET</td>
+        <td>Retrieve a list of customers.</td>
+      </tr>
+      <tr>
+        <td>GET /customer/:id</td>
+        <td>GET</td>
+        <td>Retrieve detailed information about a specific customer.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Orders</h2>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>POST /order</td>
+        <td>POST</td>
+        <td>Create a new order with the specified information.</td>
+      </tr>
+      <tr>
+        <td>GET /order</td>
+        <td>GET</td>
+        <td>Retrieve a list of orders.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>This documentation outlines the endpoints and usage of the Sales Point API. Please make sure to replace <token> and other placeholders with the actual values when making API requests.</p>
+</body>
+</html>
