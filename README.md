@@ -1,3 +1,5 @@
+esse repositório é a primeira API que fiz na vida :)
+
 # Project: Sales Point API
 
 # 📁 Collection: Categories
