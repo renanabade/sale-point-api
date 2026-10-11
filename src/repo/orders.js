@@ -33,20 +33,20 @@ const loadOrdersProduct = async () => {
   return foundOrdes;
 };
 
-const getOrdersIdCostumer = async (customer_id) => {
-  const ordersIdCostumer = await knex("orders")
+const getOrdersIdCustomer = async (customer_id) => {
+  const ordersIdCustomer = await knex("orders")
     .select("id", "customer_id", "note", "total_value")
     .where("customer_id", customer_id);
 
-  return ordersIdCostumer;
+  return ordersIdCustomer;
 };
 
-const getOrdersProductIdCostumer = async (order_id) => {
-  const getOrdersProductIdCostumer = await knex("order_products")
+const getOrdersProductIdCustomer = async (order_id) => {
+  const getOrdersProductIdCustomer = await knex("order_products")
     .select("id", "order_id", "product_id", "product_quantity", "product_value")
     .where("order_id", order_id);
 
-  return getOrdersProductIdCostumer;
+  return getOrdersProductIdCustomer;
 };
 
 const getOrderByProductId = async (id) => {
@@ -85,8 +85,8 @@ module.exports = {
   createOrderProduct,
   loadOrders,
   loadOrdersProduct,
-  getOrdersIdCostumer,
-  getOrdersProductIdCostumer,
+  getOrdersIdCustomer,
+  getOrdersProductIdCustomer,
   getOrderByProductId,
   checkProductExists,
   checkProductStock,

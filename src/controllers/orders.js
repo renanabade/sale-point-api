@@ -6,7 +6,7 @@ const {
   loadOrders,
   loadOrdersProduct,
   getOrdersIdCustomer,
-  getOrdersProductBycustomer_id,
+  getOrdersProductIdCustomer,
   checkProductExists,
   checkProductStock,
   updateProductQuantity,
@@ -133,7 +133,7 @@ const printOrders = async (req, res) => {
       let result = [];
 
       for (let i = 0; i < orders.length; i++) {
-        const order_products = await getOrdersProductBycustomer_id(orders[i].id);
+        const order_products = await getOrdersProductIdCustomer(orders[i].id);
 
         result.push({ order: orders[i], order_products: order_products });
       }
